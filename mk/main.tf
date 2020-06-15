@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "private" {
     ## 全世界でユニークでなあるひつようがある
-    bucket = "private-pragmatic-terraform"
+    bucket = "private-pragmatic-terraform-2c128990-e770-448b-8ad0"
 
     ## 有効にするとバージョニングしてくれる
     versioning {
@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "private" {
         rule {
             apply_server_side_encryption_by_default {
                 ## アルゴリズム
-                sse_algorithm = "AWS256"
+                sse_algorithm = "AES256"
             }
         }
     }
@@ -26,7 +26,7 @@ resource "aws_s3_bucket_public_access_block" "private" {
 }
 
 resource "aws_s3_bucket" "public" {
-    bucket = "public_pragmatic-terraform"
+    bucket = "public-pragmatic-terraform-2c128990-e770-448b-8ad0"
     acl = "public-read"
 
     cors_rule {
@@ -38,7 +38,7 @@ resource "aws_s3_bucket" "public" {
 }
 
 resource "aws_s3_bucket" "alb_log" {
-    bucket = "alb-log-pragmatic-terraform"
+    bucket = "alb-log-pragmatic-terraform-2c128990-e770-448b-8ad0"
 
     lifecycle_rule {
         enabled = true
@@ -63,4 +63,9 @@ data "aws_iam_policy_document" "alb_log" {
             identifiers = ["582318560864"]
         }
     }
+}
+
+resource "aws_s3_bucket" "force_destroy" {
+    bucket = "force-destroy-pragmatic-terra-2c128990-e770-448b-8ad0"
+    force_destroy = true
 }
